@@ -46,23 +46,19 @@ public interface TreeFunctions {    // Any "GenericArray" below is the same as a
         GenericArray<E> result = new GenericArray<>();          // result stores an array of linearized binary tree.
         temp.offer(root);
 
-        while(!temp.isEmpty() && !temp.allNull()) {
-            int size = temp.size();
-            for(int i=0; i<size; i++) {
-                TreeNode<E> current = temp.poll();
-                if(current==null) {                             // unlike the typical level-order traversal, adding null to the queue is now possible.
-                    result.addLast(null);               // the level-order traversal will keep adding every node to the queue until the queue
-                    temp.offer(null);                   // realizes that there is no non-null element left (a.k.a. no more useful nodes to add).
-                    temp.offer(null);
-                }
-                else {
-                    result.addLast(current.getValue());
-                    temp.offer(current.getLeft());
-                    temp.offer(current.getRight());
-                }
+        while(!temp.allNull()) {
+            TreeNode<E> current = temp.poll();
+            if(current==null) {                                 // unlike the typical level-order traversal, adding null to the queue is now possible.
+                result.addLast(null);                   // the level-order traversal will keep adding every node to the queue until the queue
+                temp.offer(null);                       // realizes that there is no non-null element left (a.k.a. no more useful nodes to add).
+                temp.offer(null);
+            }
+            else {
+                result.addLast(current.getValue());
+                temp.offer(current.getLeft());
+                temp.offer(current.getRight());
             }
         }
-        while(result.get(result.size()-1)==null) result.deleteLast();    // any trailing null (after the 9) is removed before returning the output array
         return result.returnArray();                                     // Time and space complexity: O(n), where n is the total number of nodes in the input tree.
     }
 
