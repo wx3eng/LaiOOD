@@ -62,7 +62,7 @@ public class IntMaxHeap {
         int parentIndex = 0;
         //when parentIndex/index-of-interest is less than the index of the last element in the queue (a.k.a have not finished percolating down),
         //find its child nodes and swap with the larger of the children (since in a maxheap, larger nodes should be placed higher/more in front).
-        while(parentIndex<size-1) {
+        while(parentIndex<(size-1)/2) {
             //childIndex is the left child index of the parent node/node-of-interest; childIndex+1 is the respective right child index.
             int childIndex = 2*parentIndex + 1;
             //if the childIndex(a.k.a. left child) is non-existent(meaning that the right child is also nonexistent due to complete tree property),
@@ -104,7 +104,6 @@ public class IntMaxHeap {
     public boolean isFull() {
         return sizeFixed && size==array.length;
     }
-
 
     //helper functions
     private void swap(int[] array, int a, int b) {
