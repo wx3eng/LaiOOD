@@ -14,7 +14,7 @@ public class TreeAVL<E> implements Comparator<E> {
 
     public boolean insert(E element) {
         if(element==null) return false;
-        root = (root==null) ? new TreeNode<>(element) : insert(root, new TreeNode<>(element));
+        root = insert(root, new TreeNode<>(element));
         return true;
     }
 
