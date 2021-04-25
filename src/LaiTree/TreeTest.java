@@ -6,19 +6,116 @@ public class TreeTest {
 
     public static void main(String[] args) {
 
-        Integer[] testTreeInput = new Integer[] {6, 4, 2, 1, null, null, -5, 0, null, null, null, null, null, 9};
-        System.out.println(Arrays.toString(testTreeInput));
+        //self-balancing tree (看看 AVL tree 是咋回事):
 
-        TreeNode<Integer> testTree = TreeFunctions.constructTreeBlind(testTreeInput);   // get constructed tree from the TreeBuild function.
-        System.out.println(Arrays.toString(TreeFunctions.destructTreeBlind(testTree))); // print out the constructed tree from input tree list.
-        System.out.println();
-        //Integer[] deconstructedTestTree = TreeFunctions.destructTreeBlind(testTree);            // get deconstructed tree from the TreeBuild function. (this function will cause error)
-        //System.out.println(TreeFunctions.arrayEqual(testTreeInput, deconstructedTestTree));     // return whether the original input tree array and the reconstructed array are equal.
+        //initial tree has no elements
+        TreeAVL<Integer> tree = new TreeAVL<>();    //initialize AVL tree
 
-        System.out.println(Arrays.toString(TreeFunctions.preOrderTraversal(testTree)));     // print pre-order traversal.
-        System.out.println(Arrays.toString(TreeFunctions.inOrderTraversal(testTree)));      // print in-order traversal.
-        System.out.println(Arrays.toString(TreeFunctions.postOrderTraversal(testTree)));    // print post-order traversal.
-        System.out.println(Arrays.toString(TreeFunctions.levelOrderTraversal(testTree)));   // print level-order traversal.
+        tree.insert(4);                     //After inserting 4:          root-->  4
+
+        tree.insert(3);                     //After inserting 3:          root-->  4
+                                                    //                                    /
+                                                    //                                   3
+
+        tree.insert(2);                     //After inserting 2:          root-->  4
+                                                    //                                    /
+                                                    //                                   3
+                                                    //                                  /
+                                                    //                                 2
+
+                                                    //UNBALANCED NOW at 4: Fixed to balanced:
+                                                    //                            root-->  3
+                                                    //                                    / \
+                                                    //                                   2   4
+
+        tree.insert(1);                     //After inserting 1:          root-->  3
+                                                    //                                    / \
+                                                    //                                   2   4
+                                                    //                                  /
+                                                    //                                 1
+
+        tree.insert(0);                     //After inserting 0:          root-->  3
+                                                    //                                    / \
+                                                    //                                   2   4
+                                                    //                                  /
+                                                    //                                 1
+                                                    //                                /
+                                                    //                               0
+
+                                                    //UNBALANCED NOW at 2: Fixed to balanced:
+                                                    //                            root-->  3
+                                                    //                                    / \
+                                                    //                                   1   4
+                                                    //                                  / \
+                                                    //                                 0   2
+
+        tree.insert(-1);                     //After inserting -1:          root-->  3
+                                                     //                                    / \
+                                                     //                                   1   4
+                                                     //                                  / \
+                                                     //                                 0   2
+                                                     //                                /
+                                                     //                               -1
+
+                                                     //UNBALANCED NOW at 4: Fixed to balanced:
+                                                     //                            root-->   1
+                                                     //                                    /   \
+                                                     //                                   0     3
+                                                     //                                  /     / \
+                                                     //                                -1     2   4
+
+        tree.insert(-2);                     //After inserting -2:         root-->   1
+                                                     //                                    /   \
+                                                     //                                   0     3
+                                                     //                                  /     / \
+                                                     //                                -1     2   4
+                                                     //                                /
+                                                     //                              -2
+
+                                                     //UNBALANCED NOW at -1: Fixed to balanced:
+                                                     //                            root-->   1
+                                                     //                                    /   \
+                                                     //                                  -1     3
+                                                     //                                  / \   / \
+                                                     //                                -2   0 2   4
+
+        tree.insert(8);                      //After inserting 8:          root-->   1
+                                                     //                                    /   \
+                                                     //                                  -1     3
+                                                     //                                  / \   / \
+                                                     //                                -2   0 2   4
+                                                     //                                            \
+                                                     //                                             8
+
+        tree.insert(9);                      //After inserting 9:          root-->   1
+                                                     //                                    /   \
+                                                     //                                  -1     3
+                                                     //                                  / \   / \
+                                                     //                                -2   0 2   4
+                                                     //                                            \
+                                                     //                                             8
+                                                     //                                              \
+                                                     //                                               9
+
+                                                     //UNBALANCED NOW at 4: Fixed to balanced:
+                                                     //                            root-->   1
+                                                     //                                    /   \
+                                                     //                                  -1     3
+                                                     //                                  / \   / \
+                                                     //                                -2   0 2   8
+                                                     //                                          / \
+                                                     //                                         4   9
+
+
+                                                     //level-order traversal should be [1, -1, 3, -2, 0, 2, 8, 4, 9];
+                                                     //in-order traversal should be [-2, -1, 0, 1, 2, 3, 4, 8, 9];
+                                                     //pre-order traversal should be [1, -1, -2, 0, 3, 2, 8, 4, 9];
+                                                     //post-order traversal should be [-2, 0, -1, 2, 4, 9, 8, 3, 1];
+
+        System.out.println(Arrays.toString(TreeFunctions.levelOrderTraversal(tree.root)));
+        System.out.println(Arrays.toString(TreeFunctions.inOrderTraversal(tree.root)));
+        System.out.println(Arrays.toString(TreeFunctions.preOrderTraversal(tree.root)));
+        System.out.println(Arrays.toString(TreeFunctions.postOrderTraversal(tree.root)));
     }
 
 }
