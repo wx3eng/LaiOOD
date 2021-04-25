@@ -14,8 +14,7 @@ public class TreeAVL<E> implements Comparator<E> {
 
     public boolean insert(E element) {
         if(element==null) return false;
-        if(root==null) root = new TreeNode<>(element);
-        else insert(root, new TreeNode<>(element));
+        root = (root==null) ? new TreeNode<>(element) : insert(root, new TreeNode<>(element));
         return true;
     }
 
@@ -37,8 +36,7 @@ public class TreeAVL<E> implements Comparator<E> {
                 leftNode = rotateLeft(leftNode);
                 leftNode.setHeight(leftNode.getHeight()+1);
             }
-            if(root==node) return root = rotateRight(node);
-            else return rotateRight(node);
+            return rotateRight(node);
         }
         if(rightHeight-leftHeight > 1) {
             TreeNode<E> rightNode = node.getRight();
@@ -46,8 +44,7 @@ public class TreeAVL<E> implements Comparator<E> {
                 rightNode = rotateLeft(rightNode);
                 rightNode.setHeight(rightNode.getHeight()+1);
             }
-            if(root==node) return root = rotateLeft(node);
-            else return rotateLeft(node);
+            return rotateLeft(node);
         }
 
         node.setHeight(Math.max(leftHeight, rightHeight) + 1);
