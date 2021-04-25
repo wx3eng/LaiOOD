@@ -33,16 +33,16 @@ public class TreeAVL<E> implements Comparator<E> {
         if(leftHeight-rightHeight > 1) {
             TreeNode<E> leftNode = node.getLeft();
             if(height(leftNode.getLeft()) < height(leftNode.getRight())) {
-                leftNode = rotateLeft(leftNode);
-                leftNode.setHeight(leftNode.getHeight()+1);
+                node.appendLeft(rotateLeft(leftNode));
+                node.getLeft().setHeight(leftNode.getHeight()+1);
             }
             return rotateRight(node);
         }
         if(rightHeight-leftHeight > 1) {
             TreeNode<E> rightNode = node.getRight();
             if(height(rightNode.getRight()) < height(rightNode.getLeft())) {
-                rightNode = rotateLeft(rightNode);
-                rightNode.setHeight(rightNode.getHeight()+1);
+                node.appendRight(rotateLeft(rightNode));
+                node.getRight().setHeight(rightNode.getHeight()+1);
             }
             return rotateLeft(node);
         }
