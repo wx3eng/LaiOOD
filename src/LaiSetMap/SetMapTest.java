@@ -7,9 +7,11 @@ public class SetMapTest {
     public static void main(String[] args) {
 
         long startTime = System.nanoTime();
-        IntegerCounterHashMap<String> hashSet = new IntegerCounterHashMap<>();
+        IntegerCounterHashMap<String> hashSet = new IntegerCounterHashMap<>();  // a HashMap that must map to Integer values
+        // TreeBucketHashSet<String> hashSet = new TreeBucketHashSet<>();        // a HashSet that completely inherits the Integer HashMap
         String randomString = generateRandomString();
         for(int i=0; i<200000; i++) {
+            //hashSet.add(randomString);
             hashSet.add(generateRandomString());
         }
 
@@ -28,6 +30,7 @@ public class SetMapTest {
         System.out.println(totalTime);
 
         System.out.println(index);
+
     }
 
     public static String generateRandomString() {

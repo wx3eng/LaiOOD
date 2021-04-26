@@ -7,10 +7,16 @@ public class IntegerCounterHashMap<E> {
     private final static double LOADING_FACTOR = 0.75;
     private TreeAVL<E>[] array;
     private int size;
+    private final boolean locked;
 
-    public IntegerCounterHashMap() {
+    public IntegerCounterHashMap(boolean locked) {
         array = (TreeAVL<E>[]) new TreeAVL[13];
         size = 0;
+        this.locked = locked;
+    }
+
+    public IntegerCounterHashMap() {
+        this(false);
     }
 
     public int get(E element) { return array[index(element)]==null ? 0 : array[index(element)].search(element); }
@@ -23,7 +29,8 @@ public class IntegerCounterHashMap<E> {
         if(element==null) return false;
         if(size > array.length * LOADING_FACTOR) increaseCapacity();
         if(array[index(element)]==null) array[index(element)] = new TreeAVL<>();
-        if(array[index(element)].search(element)==0) size++;
+        if(locked && array[index(element)].search(element)==1) return false;
+        if(locked || array[index(element)].search(element)==0) size++;
         return array[index(element)].insert(element);
     }
 
