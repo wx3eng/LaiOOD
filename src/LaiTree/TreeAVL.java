@@ -10,13 +10,21 @@ public class TreeAVL<E> implements Comparator<E> {
         return height(root);
     }
 
-    private int height(TreeNode<E> node) { return node==null ? 0 : node.getHeight(); }
-
     public boolean insert(E element) {
         if(element==null) return false;
         root = insert(root, new TreeNode<>(element));
         return true;
     }
+
+    public int search(E element) {
+        TreeNode<E> temp = root;
+        while(temp!=null && compare(element, temp.getValue())!=0) {
+            temp = compare(element, temp.getValue())<0 ? temp.getLeft() : temp.getRight();
+        }
+        return temp==null ? 0 : temp.getCount();
+    }
+
+    private int height(TreeNode<E> node) { return node==null ? 0 : node.getHeight(); }
 
     private TreeNode<E> insert(TreeNode<E> node, TreeNode<E> element) {
         if(node==null) return element;
@@ -41,7 +49,7 @@ public class TreeAVL<E> implements Comparator<E> {
         if(rightHeight-leftHeight > 1) {
             TreeNode<E> rightNode = node.getRight();
             if(height(rightNode.getRight()) < height(rightNode.getLeft())) {
-                node.appendRight(rotateLeft(rightNode));
+                node.appendRight(rotateRight(rightNode));
                 node.getRight().setHeight(rightNode.getHeight()+1);
             }
             return rotateLeft(node);
