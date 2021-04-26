@@ -52,7 +52,7 @@ public class TreeAVL<E> implements Comparator<E> {
             return node;
         }
         if (compare(element.getValue(), node.getValue())<0) node.appendLeft(insert(node.getLeft(), element));
-        if (compare(element.getValue(), node.getValue())>0) node.appendRight(insert(node.getRight(), element));
+        else if (compare(element.getValue(), node.getValue())>0) node.appendRight(insert(node.getRight(), element));
 
         return balance(node);
     }
