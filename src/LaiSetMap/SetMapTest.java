@@ -6,28 +6,46 @@ public class SetMapTest {
 
     public static void main(String[] args) {
 
-        long startTime = System.nanoTime();
-        IntegerCounterHashMap<String> hashSet = new IntegerCounterHashMap<>();  // a HashMap that must map to Integer values
-        // TreeBucketHashSet<String> hashSet = new TreeBucketHashSet<>();        // a HashSet that completely inherits the Integer HashMap
+        TreeBucketHashMap<String, String> hashSet = new TreeBucketHashMap<>();  // a HashMap
+        //TreeBucketHashSet<String> hashSet = new TreeBucketHashSet<>();        // a HashSet
+
+        int testSize = 2000000;
         String randomString = generateRandomString();
-        for(int i=0; i<200000; i++) {
+        String[] randomStrings = new String[testSize];
+        for(int i=0; i<testSize; i++) { randomStrings[i] = generateRandomString(); }
+
+        long startTime = System.nanoTime();
+
+        for(int i=0; i<testSize; i++) {
+            //hashSet.put(randomString, randomStrings[i]);
+            hashSet.put(randomStrings[i], randomStrings[i]);
             //hashSet.add(randomString);
-            hashSet.add(generateRandomString());
+            //hashSet.add(generateRandomString());
         }
 
         long endTime = System.nanoTime();
         long totalTime = endTime-startTime;
-        System.out.println(totalTime);
+        System.out.println(((double) totalTime/1000000)/1000);
 
         int index = 0;
+        /*
         while(!hashSet.isEmpty()) {
             hashSet.removeRandom();
             index++;
         }
 
+         */
+
+
+        for(int i=0; i<testSize; i++) {
+            hashSet.remove(randomStrings[i]);
+        }
+
+
+
         endTime = System.nanoTime();
         totalTime = endTime-startTime;
-        System.out.println(totalTime);
+        System.out.println(((double) totalTime/1000000)/1000);
 
         System.out.println(index);
 
@@ -36,7 +54,7 @@ public class SetMapTest {
     public static String generateRandomString() {
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'
-        int targetStringLength = 20;
+        int targetStringLength = 40;
         Random random = new Random();
         StringBuilder buffer = new StringBuilder(targetStringLength);
         for (int i = 0; i < targetStringLength; i++) {

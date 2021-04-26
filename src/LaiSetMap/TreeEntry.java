@@ -1,4 +1,4 @@
-package LaiTree;
+package LaiSetMap;
 
 public class TreeEntry<K, V> {
 
@@ -11,6 +11,7 @@ public class TreeEntry<K, V> {
     public TreeEntry(K key, V value) {
         this.key = key;
         this.value = value;
+        height = 1;
     }
 
     public void appendLeft(TreeEntry<K, V> node) {

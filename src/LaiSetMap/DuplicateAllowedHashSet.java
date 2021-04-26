@@ -2,20 +2,20 @@ package LaiSetMap;
 
 import LaiTree.TreeAVL;
 
-public class IntegerCounterHashMap<E> {
+public class DuplicateAllowedHashSet<E> {
 
     private final static double LOADING_FACTOR = 0.75;
     private TreeAVL<E>[] array;
     private int size;
     private final boolean noDuplicates;
 
-    public IntegerCounterHashMap(boolean noDuplicates) {
+    public DuplicateAllowedHashSet(boolean noDuplicates) {
         array = (TreeAVL<E>[]) new TreeAVL[13];
         size = 0;
         this.noDuplicates = noDuplicates;
     }
 
-    public IntegerCounterHashMap() {
+    public DuplicateAllowedHashSet() {
         this(false);
     }
 
