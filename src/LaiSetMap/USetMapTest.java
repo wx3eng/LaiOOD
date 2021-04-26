@@ -2,7 +2,7 @@ package LaiSetMap;
 
 import java.util.Random;
 
-public class SetMapTest {
+public class USetMapTest {
 
     public static void main(String[] args) {
 
