@@ -6,18 +6,39 @@ public class TreeTest {
 
     public static void main(String[] args) {
 
+        TreeAVL<Integer> tree = new TreeAVL<>();
+        for(int i=0; i<20; i++) {
+            tree.insert(3+i*13);
+        }
+        System.out.println(Arrays.toString(TreeFunctions.preOrderTraversal(tree.root)));
+        TreeFunctions.destructTreePrint(tree.root);
+
+        System.out.println("DebugTreeStarts>>>>>>>>>>>>>>>>>>>>>>>");
+        int i=0;
+        while(!tree.isEmpty()) {
+            System.out.println("-----------------BEGIN OF NEXT------------------------");
+            System.out.println(tree.delete());
+            TreeFunctions.destructTreePrint(tree.root);
+            System.out.println(Arrays.toString(TreeFunctions.preOrderTraversal(tree.root)));
+            System.out.println("-----------------NEXT OF CURRENT------------------------");
+            i++;
+        }
+        System.out.println(i);
+
+
+    /*
         //self-balancing tree (看看 AVL tree 是咋回事):
 
         //initial tree has no elements
         TreeAVL<Integer> tree = new TreeAVL<>();    //initialize AVL tree
 
-        tree.insert(4);                     //After inserting 4:          root-->  4
+        tree.insert(4);                             //After inserting 4:          root-->  4
 
-        tree.insert(3);                     //After inserting 3:          root-->  4
+        tree.insert(3);                             //After inserting 3:          root-->  4
                                                     //                                    /
                                                     //                                   3
 
-        tree.insert(2);                     //After inserting 2:          root-->  4
+        tree.insert(2);                             //After inserting 2:          root-->  4
                                                     //                                    /
                                                     //                                   3
                                                     //                                  /
@@ -28,13 +49,13 @@ public class TreeTest {
                                                     //                                    / \
                                                     //                                   2   4
 
-        tree.insert(1);                     //After inserting 1:          root-->  3
+        tree.insert(1);                             //After inserting 1:          root-->  3
                                                     //                                    / \
                                                     //                                   2   4
                                                     //                                  /
                                                     //                                 1
 
-        tree.insert(0);                     //After inserting 0:          root-->  3
+        tree.insert(0);                             //After inserting 0:          root-->  3
                                                     //                                    / \
                                                     //                                   2   4
                                                     //                                  /
@@ -49,7 +70,7 @@ public class TreeTest {
                                                     //                                  / \
                                                     //                                 0   2
 
-        tree.insert(-1);                     //After inserting -1:          root-->  3
+        tree.insert(-1);                             //After inserting -1:          root-->  3
                                                      //                                    / \
                                                      //                                   1   4
                                                      //                                  / \
@@ -64,7 +85,7 @@ public class TreeTest {
                                                      //                                  /     / \
                                                      //                                -1     2   4
 
-        tree.insert(-2);                     //After inserting -2:         root-->   1
+        tree.insert(-2);                             //After inserting -2:         root-->   1
                                                      //                                    /   \
                                                      //                                   0     3
                                                      //                                  /     / \
@@ -79,7 +100,7 @@ public class TreeTest {
                                                      //                                  / \   / \
                                                      //                                -2   0 2   4
 
-        tree.insert(8);                      //After inserting 8:          root-->   1
+        tree.insert(8);                              //After inserting 8:          root-->   1
                                                      //                                    /   \
                                                      //                                  -1     3
                                                      //                                  / \   / \
@@ -87,7 +108,7 @@ public class TreeTest {
                                                      //                                            \
                                                      //                                             8
 
-        tree.insert(9);                      //After inserting 9:          root-->   1
+        tree.insert(9);                              //After inserting 9:          root-->   1
                                                      //                                    /   \
                                                      //                                  -1     3
                                                      //                                  / \   / \
@@ -116,6 +137,7 @@ public class TreeTest {
         System.out.println(Arrays.toString(TreeFunctions.inOrderTraversal(tree.root)));
         System.out.println(Arrays.toString(TreeFunctions.preOrderTraversal(tree.root)));
         System.out.println(Arrays.toString(TreeFunctions.postOrderTraversal(tree.root)));
-    }
+        */
 
+    }
 }

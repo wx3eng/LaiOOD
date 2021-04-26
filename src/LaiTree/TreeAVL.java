@@ -10,30 +10,89 @@ public class TreeAVL<E> implements Comparator<E> {
         return height(root);
     }
 
+    public int search(E element) {
+        if(element==null) return 0;
+        TreeNode<E> temp = root;
+        while(temp!=null && !equalElements(element, temp.getValue())) {
+            temp = compare(element, temp.getValue())<0 ? temp.getLeft() : temp.getRight();
+        }
+        return temp==null ? 0 : temp.getCount();
+    }
+
     public boolean insert(E element) {
         if(element==null) return false;
         root = insert(root, new TreeNode<>(element));
         return true;
     }
 
-    public int search(E element) {
-        TreeNode<E> temp = root;
-        while(temp!=null && compare(element, temp.getValue())!=0) {
-            temp = compare(element, temp.getValue())<0 ? temp.getLeft() : temp.getRight();
-        }
-        return temp==null ? 0 : temp.getCount();
+    public boolean delete(E element) {
+        if(element==null) return false;
+        TreeNode<E>[] result = (TreeNode<E>[]) new TreeNode[] {new TreeNode<>(element)};
+        root = delete(root, result);
+        return result[0]==null;
     }
+
+    public E delete() {
+        if(root==null) return null;
+        E returnValue = root.getValue();
+        delete(returnValue);
+        return returnValue;
+    }
+
+    public boolean isEmpty() { return root==null; };
 
     private int height(TreeNode<E> node) { return node==null ? 0 : node.getHeight(); }
 
     private TreeNode<E> insert(TreeNode<E> node, TreeNode<E> element) {
+
         if(node==null) return element;
-        if(compare(element.getValue(), node.getValue())==0) {
+
+        if(equalElements(element.getValue(), node.getValue())) {
             node.setCount(node.getCount()+1);
             return node;
         }
         if (compare(element.getValue(), node.getValue())<0) node.appendLeft(insert(node.getLeft(), element));
         if (compare(element.getValue(), node.getValue())>0) node.appendRight(insert(node.getRight(), element));
+
+        return balance(node);
+    }
+
+    private TreeNode<E> delete(TreeNode<E> node, TreeNode<E>[] element) {
+
+        if(node==null) return null;
+        if(element[0]==null) {
+            if(node.getRight()!=null) {
+                node.appendRight(delete(node.getRight(), element));
+            }
+            else {
+                element[0] = node;
+                return node.getLeft();
+            }
+        }
+        else if(equalElements(element[0].getValue(), node.getValue())) {
+            element[0] = null;
+            if(node.getCount()>1) {
+                node.setCount(node.getCount()-1);
+                return node;
+            }
+            if(node.getLeft()==null && node.getRight()==null) return null;
+            if(node.getLeft()==null) return node.getRight();
+            if(node.getRight()==null) return node.getLeft();
+            node.appendLeft(delete(node.getLeft(), element));
+            element[0].appendLeft(node.getLeft());
+            element[0].appendRight(node.getRight());
+            node = element[0];
+            element[0] = null;
+        }
+        else {
+            if (compare(element[0].getValue(), node.getValue())<0) node.appendLeft(delete(node.getLeft(), element));
+            else if (compare(element[0].getValue(), node.getValue())>0) node.appendRight(delete(node.getRight(), element));
+        }
+
+        return balance(node);
+    }
+
+    private TreeNode<E> balance(TreeNode<E> node) {
 
         int leftHeight = height(node.getLeft());
         int rightHeight = height(node.getRight());
@@ -42,7 +101,6 @@ public class TreeAVL<E> implements Comparator<E> {
             TreeNode<E> leftNode = node.getLeft();
             if(height(leftNode.getLeft()) < height(leftNode.getRight())) {
                 node.appendLeft(rotateLeft(leftNode));
-                node.getLeft().setHeight(leftNode.getHeight()+1);
             }
             return rotateRight(node);
         }
@@ -50,7 +108,6 @@ public class TreeAVL<E> implements Comparator<E> {
             TreeNode<E> rightNode = node.getRight();
             if(height(rightNode.getRight()) < height(rightNode.getLeft())) {
                 node.appendRight(rotateRight(rightNode));
-                node.getRight().setHeight(rightNode.getHeight()+1);
             }
             return rotateLeft(node);
         }
@@ -63,7 +120,8 @@ public class TreeAVL<E> implements Comparator<E> {
         TreeNode<E> temp = node.getRight();
         node.appendRight(temp.getLeft());
         temp.appendLeft(node);
-        node.setHeight(node.getHeight()-1);
+        node.setHeight(Math.max(height(node.getLeft()), height(node.getRight()) + 1));
+        temp.setHeight(Math.max(height(temp.getLeft()), height(temp.getRight()) + 1));
         return temp;
     }
 
@@ -71,10 +129,12 @@ public class TreeAVL<E> implements Comparator<E> {
         TreeNode<E> temp = node.getLeft();
         node.appendLeft(temp.getRight());
         temp.appendRight(node);
-        node.setHeight(node.getHeight()-1);
+        node.setHeight(Math.max(height(node.getLeft()), height(node.getRight()) + 1));
+        temp.setHeight(Math.max(height(temp.getLeft()), height(temp.getRight()) + 1));
         return temp;
     }
 
+    // Lazy implementation for Integer and Character here
     @Override
     public int compare(E o1, E o2) {
         if(o1 instanceof Integer) { return (Integer) o1-(Integer) o2; }
@@ -90,4 +150,7 @@ public class TreeAVL<E> implements Comparator<E> {
         }
         return 0;
     }
+
+    // Equals for
+    private boolean equalElements(E element1, E element2) { return (element1==null && element2==null) || (element1!=null && element1.equals(element2)); }
 }

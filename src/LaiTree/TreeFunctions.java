@@ -62,6 +62,54 @@ public interface TreeFunctions {    // Any "GenericArray" below is the same as a
         return result.returnArray();                                     // Time and space complexity: O(n), where n is the total number of nodes in the input tree.
     }
 
+    static <E> void destructTreePrint(TreeNode<E> root) {
+
+        ArrayQueue<TreeNode<E>> temp = new ArrayQueue<>();
+        ArrayQueue<ArrayQueue<String>> result = new ArrayQueue<>();
+        temp.offer(root);
+
+        while(!temp.allNull()) {
+            int size = temp.size();
+            ArrayQueue<String> temp2 = new ArrayQueue<>();
+            for(int i=0; i<size; i++){
+                TreeNode<E> current = temp.poll();
+                if(current==null) {
+                    temp2.offer("X");
+                    temp.offer(null);
+                    temp.offer(null);
+                }
+                else {
+                    temp2.offer(current.getValue().toString());
+                    temp.offer(current.getLeft());
+                    temp.offer(current.getRight());
+                }
+            }
+            result.offer(temp2);
+        }
+
+        int edgeSize = (int) Math.pow(2, result.size() - 1);
+        int spacingSize = 2 * edgeSize - 1;
+        int spacingOccurrence = 0;
+        while(!result.isEmpty()) {
+            ArrayQueue<String> current = result.poll();
+            System.out.print(returnEdge(edgeSize));
+            for(int i=0; i<spacingOccurrence; i++) {
+                System.out.print(current.poll());
+                System.out.print(returnEdge(spacingSize));
+            }
+            System.out.print(current.poll());
+            System.out.println(returnEdge(edgeSize));
+            edgeSize /= 2;
+            spacingSize /= 2;
+            spacingOccurrence = 2*spacingOccurrence + 1;
+        }
+    }
+
+    static String returnEdge(int edgeSize) {
+        StringBuilder temp = new StringBuilder();
+        for(int i=0; i<edgeSize; i++) temp.append(" ");
+        return temp.toString();
+    }
 
     // same to the class solution.
     static <E> E[] preOrderTraversal(TreeNode<E> root) {
@@ -135,8 +183,8 @@ public interface TreeFunctions {    // Any "GenericArray" below is the same as a
     //same to the class solution.
     static <E> E[] levelOrderTraversal(TreeNode<E> root) {
 
-        if(root==null) return null;
         GenericArray<E> result = new GenericArray<>();
+        if(root==null) return result.returnArray();
         ArrayQueue<TreeNode<E>> queue = new ArrayQueue<>();
         queue.offer(root);
 
