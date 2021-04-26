@@ -6,7 +6,7 @@ public class MathTest {
         double number = 79;
 
         System.out.println(MathFunctions.SquareRoot(1.44e-40));
-
+        System.out.println(MathFunctions.NthRoot(-12369, 83));
     }
 
 }
