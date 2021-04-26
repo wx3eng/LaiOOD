@@ -6,16 +6,28 @@ public class SetMapTest {
 
     public static void main(String[] args) {
 
+        long startTime = System.nanoTime();
         IntegerCounterHashMap<String> hashSet = new IntegerCounterHashMap<>();
         String randomString = generateRandomString();
-        for(int i=0; i<20; i++) {
+        for(int i=0; i<200000; i++) {
             hashSet.add(generateRandomString());
         }
+
+        long endTime = System.nanoTime();
+        long totalTime = endTime-startTime;
+        System.out.println(totalTime);
+
+        int index = 0;
         while(!hashSet.isEmpty()) {
-            System.out.print(hashSet.remove());
-            System.out.print(" ");
+            hashSet.removeRandom();
+            index++;
         }
-        System.out.println(" ");
+
+        endTime = System.nanoTime();
+        totalTime = endTime-startTime;
+        System.out.println(totalTime);
+
+        System.out.println(index);
     }
 
     public static String generateRandomString() {

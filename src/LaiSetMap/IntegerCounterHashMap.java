@@ -40,7 +40,7 @@ public class IntegerCounterHashMap<E> {
         return result-1;
     }
 
-    public E remove() {
+    public E removeRandom() {
         if(size==0) return null;
         for (int i=0; i<array.length; i++) {
             if (array[i]==null) continue;
