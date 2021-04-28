@@ -6,12 +6,14 @@ import java.util.List;
 public class LimitedLengthCombinations {
 
     public static void main(String[] args) {
-        List<List<Integer>> solution = combine(6, 3);
+        // test the algorithm.
+        List<List<Integer>> solution = combine(6, 4);
         for(List<Integer> i : solution) System.out.println(i.toString());
     }
 
     public static List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> solution = new ArrayList<>();
+        if(n<=0 || k<0) return solution; //corner case
         combine(solution, new ArrayList<>(), 1, n, 0, k);
         return solution;
     }
