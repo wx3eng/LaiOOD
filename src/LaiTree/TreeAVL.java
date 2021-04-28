@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 public class TreeAVL<E> implements Comparator<E> {
 
-    protected TreeNode<E> root;
+    private TreeNode<E> root;
 
     public int height() {
         return height(root);
@@ -153,4 +153,6 @@ public class TreeAVL<E> implements Comparator<E> {
 
     // Equals for
     private boolean equalElements(E element1, E element2) { return (element1==null && element2==null) || (element1!=null && element1.equals(element2)); }
+
+    public TreeNode<E> getRoot() { return root; }
 }

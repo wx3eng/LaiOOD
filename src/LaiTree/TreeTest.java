@@ -37,16 +37,16 @@ public class TreeTest {
         //System.out.println(Arrays.toString(TreeFunctions.preOrderTraversal(tree.root)));
         //System.out.println(Arrays.toString(TreeFunctions.postOrderTraversal(tree.root)));
 
-        TreeBucket<Integer, Integer> tree = new TreeBucket<>();
-        System.out.println(tree.insert(4, 3));
-        System.out.println(tree.insert(3, 5));
-        System.out.println(tree.insert(2, 5));
-        System.out.println(tree.insert(1, 5));
-        System.out.println(tree.insert(0, 5));
-        System.out.println(tree.insert(-1, 5));
-        System.out.println(tree.insert(-2, 5));
-        System.out.println(tree.insert(8, 5));
-        System.out.println(tree.insert(9, 5));
-        System.out.println(tree.isEmpty());
+        TreeAVL<Integer> tree = new TreeAVL<>();
+        tree.insert(4);
+        tree.insert(3);
+        tree.insert(2);
+        tree.insert(1);
+        tree.insert(0);
+        tree.insert(-1);
+        tree.insert(-2);
+        tree.insert(8);
+        tree.insert(9);
+        TreeFunctions.destructTreePrint(tree.getRoot());
     }
 }
