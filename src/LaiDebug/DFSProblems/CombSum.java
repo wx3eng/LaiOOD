@@ -1,4 +1,4 @@
-package LaiDebug.combSum;
+package LaiDebug.DFSProblems;
 
 import java.util.*;
 
