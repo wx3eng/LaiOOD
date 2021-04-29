@@ -31,22 +31,18 @@ public class ArrayBinarySearch {
 
     private static int[] binarySurround(int[][] matrix, int target, int up, int down, int left, int right) {
         while(true) {
-            int upperBound = largestSmallVertical(matrix, target, up, down, left);
-            if (upperBound == -1) return new int[]{-1, -1};
-            if (matrix[upperBound][left] == target) return new int[]{upperBound, left};
-            int lowerBound = smallestLargeVertical(matrix, target, up, down, right);
-            if (lowerBound == -1) return new int[]{-1, -1};
-            if (matrix[lowerBound][right] == target) return new int[]{lowerBound, right};
-            down = upperBound;
-            up = lowerBound;
-            int leftBound = largestSmallHorizontal(matrix, target, up, left, right);
-            if (leftBound == -1) return new int[]{-1, -1};
-            if (matrix[up][leftBound] == target) return new int[]{up, leftBound};
-            int rightBound = smallestLargeHorizontal(matrix, target, down, left, right);
-            if (rightBound == -1) return new int[]{-1, -1};
-            if (matrix[down][rightBound] == target) return new int[]{down, rightBound};
-            right = leftBound;
-            left = rightBound;
+            down = largestSmallVertical(matrix, target, up, down, left);
+            if (down == -1) return new int[]{-1, -1};
+            if (matrix[down][left] == target) return new int[]{down, left};
+            up = smallestLargeVertical(matrix, target, up, down, right);
+            if (up == -1) return new int[]{-1, -1};
+            if (matrix[up][right] == target) return new int[]{up, right};
+            right = largestSmallHorizontal(matrix, target, up, left, right);
+            if (right == -1) return new int[]{-1, -1};
+            if (matrix[up][right] == target) return new int[]{up, right};
+            left = smallestLargeHorizontal(matrix, target, down, left, right);
+            if (left == -1) return new int[]{-1, -1};
+            if (matrix[down][left] == target) return new int[]{down, left};
         }
     }
 
