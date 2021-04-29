@@ -6,7 +6,7 @@ import java.util.List;
 public class MultiplicationFactors {
 
     public static void main(String[] args) {
-        List<List<Integer>> solution = combinations(2);
+        List<List<Integer>> solution = combinations(160);
         for(List<Integer> i : solution) System.out.println(i.toString());
     }
 
