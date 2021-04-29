@@ -6,7 +6,7 @@ import java.util.List;
 public class MultiplicationFactors {
 
     public static void main(String[] args) {
-        List<List<Integer>> solution = combinations(160);
+        List<List<Integer>> solution = combinations(448);
         for(List<Integer> i : solution) System.out.println(i.toString());
     }
 
@@ -24,9 +24,8 @@ public class MultiplicationFactors {
             reference.remove(reference.size()-1);
         }
 
-        for(int i=factor; i<=(int)Math.sqrt(remainder); i++) {
+        for(int i=factor; i*i<=remainder; i++) {
             if(remainder%i != 0) continue;
-            if(remainder/i < 2) break;
             reference.add(i);
             comb(solution, reference, i, remainder/i);
             reference.remove(reference.size()-1);
