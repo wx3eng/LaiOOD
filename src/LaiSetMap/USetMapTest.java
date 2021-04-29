@@ -36,12 +36,9 @@ public class USetMapTest {
 
          */
 
-
         for(int i=0; i<testSize; i++) {
             hashSet.remove(randomStrings[i]);
         }
-
-
 
         endTime = System.nanoTime();
         totalTime = endTime-startTime;

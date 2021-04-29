@@ -10,9 +10,13 @@ public class TestClass {
         int min = 2;
         int loops = 300;
 
-        for(int i=0; i<loops; i++) {
+        for(int i=0; i<Math.sqrt(24); i++) {
             System.out.println(new Random().nextInt(max-min+1) + min);
         }
+
+
+
+        System.out.println(Math.sqrt(24));
     }
 
 }
