@@ -1,17 +1,20 @@
-package LaiSetMap;
+package LaiSetMap.LaiBucket;
+
+import LaiSetMap.LaiEntry.Entry;
+import LaiSetMap.LaiEntry.TreeEntry;
 
 import java.util.Comparator;
 
-public class TreeBucket<K, V> implements Comparator<K> {
+public class TreeBucket<K, V> extends Bucket<K, V> implements Comparator<K> {
 
-    protected TreeEntry<K, V> root;
+    private TreeEntry<K, V> root;
+    private int nodes;
 
-    public int height() {
-        return height(root);
-    }
+    public int count() { return nodes; }
 
     public V getValue(K key) {
-        if(key==null) return null;
+        if(key==null)
+            return null;
         TreeEntry<K, V> temp = root;
         while(temp!=null && !equalElements(key, temp.getKey())) {
             temp = compare(key, temp.getKey())<0 ? temp.getLeft() : temp.getRight();
@@ -20,7 +23,8 @@ public class TreeBucket<K, V> implements Comparator<K> {
     }
 
     public boolean search(K key) {
-        if(key==null) return false;
+        if(key==null)
+            return false;
         TreeEntry<K, V> temp = root;
         while(temp!=null && !equalElements(key, temp.getKey())) {
             temp = compare(key, temp.getKey())<0 ? temp.getLeft() : temp.getRight();
@@ -35,20 +39,22 @@ public class TreeBucket<K, V> implements Comparator<K> {
     }
 
     public V delete(K key) {
-        if(key==null) return null;
+        if(key==null)
+            return null;
         TreeEntry<K, V>[] result = (TreeEntry<K, V>[]) new TreeEntry[] {new TreeEntry<>(key, null)};
         root = delete(root, result);
         return result[0].getValue();
     }
 
-    public TreeEntry<K, V> delete() {
-        if(root==null) return null;
+    public Entry<K, V> delete() {
+        if(root==null)
+            return null;
         K returnKey = root.getKey();
         V returnValue = delete(returnKey);
         return new TreeEntry<>(returnKey, returnValue);
     }
 
-    public boolean isEmpty() { return root==null; };
+    public boolean isEmpty() { return root==null; }
 
     private int height(TreeEntry<K, V> node) { return node==null ? 0 : node.getHeight(); }
 
@@ -56,6 +62,7 @@ public class TreeBucket<K, V> implements Comparator<K> {
 
         if(node==null) {
             TreeEntry<K, V> temp = element[0];
+            nodes++;
             element[0] = null;
             return temp;
         }
@@ -65,14 +72,17 @@ public class TreeBucket<K, V> implements Comparator<K> {
             element[0].setValue(temp);
             return node;
         }
-        if (compare(element[0].getKey(), node.getKey())<0) node.appendLeft(insert(node.getLeft(), element));
-        else if (compare(element[0].getKey(), node.getKey())>0) node.appendRight(insert(node.getRight(), element));
+        if (compare(element[0].getKey(), node.getKey())<0)
+            node.appendLeft(insert(node.getLeft(), element));
+        else if (compare(element[0].getKey(), node.getKey())>0)
+            node.appendRight(insert(node.getRight(), element));
         return balance(node);
     }
 
     private TreeEntry<K, V> delete(TreeEntry<K, V> node, TreeEntry<K, V>[] element) {
 
-        if(node==null) return null;
+        if(node==null)
+            return null;
         if(element[0].getKey()==null) {
             if(node.getRight()!=null) {
                 node.appendRight(delete(node.getRight(), element));
@@ -83,10 +93,14 @@ public class TreeBucket<K, V> implements Comparator<K> {
             }
         }
         else if(equalElements(element[0].getKey(), node.getKey())) {
+            nodes--;
             element[0] = new TreeEntry<>(null, node.getValue());
-            if(node.getLeft()==null && node.getRight()==null) return null;
-            if(node.getLeft()==null) return node.getRight();
-            if(node.getRight()==null) return node.getLeft();
+            if(node.getLeft()==null && node.getRight()==null)
+                return null;
+            if(node.getLeft()==null)
+                return node.getRight();
+            if(node.getRight()==null)
+                return node.getLeft();
             node.appendLeft(delete(node.getLeft(), element));
             element[0].appendLeft(node.getLeft());
             element[0].appendRight(node.getRight());
@@ -95,8 +109,10 @@ public class TreeBucket<K, V> implements Comparator<K> {
             element[0] = temp;
         }
         else {
-            if (compare(element[0].getKey(), node.getKey())<0) node.appendLeft(delete(node.getLeft(), element));
-            else if (compare(element[0].getKey(), node.getKey())>0) node.appendRight(delete(node.getRight(), element));
+            if (compare(element[0].getKey(), node.getKey())<0)
+                node.appendLeft(delete(node.getLeft(), element));
+            else if (compare(element[0].getKey(), node.getKey())>0)
+                node.appendRight(delete(node.getRight(), element));
         }
 
         return balance(node);

@@ -1,7 +1,5 @@
 package LaiTree;
 
-import LaiSetMap.TreeBucket;
-
 public class TreeTest {
 
     public static void main(String[] args) {

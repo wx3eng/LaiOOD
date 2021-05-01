@@ -1,10 +1,10 @@
-package LaiSetMap;
+package LaiSetMap.LaiSet;
 
 //Set implementation with extension from duplicate-allowed HashSet, is more efficient than the variant below.
 
-public class TreeBucketHashSet<E> extends DuplicateAllowedHashSet<E> {
+public class HackSet<E> extends DuplicateAllowedHashSet<E> {
 
-    public TreeBucketHashSet() { super(true); }
+    public HackSet() { super(true); }
 
 }
 

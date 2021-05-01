@@ -1,10 +1,10 @@
-package LaiSetMap;
+package LaiSetMap.LaiEntry;
 
-public class TreeEntry<K, V> {
+public class TreeEntry<K, V> extends Entry<K,V> {
 
     private TreeEntry<K, V> left;
     private TreeEntry<K, V> right;
-    private K key;
+    private final K key;
     private V value;
     private int height;
 

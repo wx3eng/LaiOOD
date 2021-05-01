@@ -1,4 +1,4 @@
-package LaiSetMap;
+package LaiSetMap.LaiSet;
 
 import LaiTree.TreeAVL;
 
