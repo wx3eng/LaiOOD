@@ -1,6 +1,7 @@
 package LaiSetMap;
 
 import LaiSetMap.LaiMap.HybridHashMap;
+import LaiSetMap.LaiSet.HackSet;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -9,9 +10,10 @@ public class USetMapTest {
 
     public static void main(String[] args) {
 
-        HybridHashMap<String, String> hashSet = new HybridHashMap<>();          // a HashMap
-        //TreeBucketHashSet<String> hashSet = new TreeBucketHashSet<>();        // a HashSet
+        HybridHashMap<Integer, Integer> hashSet = new HybridHashMap<>();          // a HashMap
+        //HackSet<String> hashSet = new HackSet<>();        // a HashSet
 
+        /*
         int testSize = 1000000;
         int trendSize = 3;
         int trials = 40;
@@ -67,19 +69,21 @@ public class USetMapTest {
 
         System.out.println(Arrays.toString(searchMean));
         System.out.println(Arrays.toString(deleteMean));
+        */
+
+        int testSize = 52;
 
 
-        /*
         for(int i=0; i<testSize; i++) {
             hashSet.put(i*143, i);
         }
 
         for(int i=0; i<testSize; i++) {
-            System.out.println(hashSet.removeRandom());
+            System.out.println(hashSet.remove(i*143));
         }
 
         System.out.println(hashSet.isEmpty());
-        */
+
     }
 
     public static String generateRandomString() {
