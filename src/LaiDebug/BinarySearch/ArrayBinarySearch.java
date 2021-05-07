@@ -6,22 +6,6 @@ public class ArrayBinarySearch {
 
     public static void main(String[] args) {
 
-        int[] array1 = new int[]{ 0,  1,  2,  3,  4,  5,  6,  7,  7,  9};
-        int[] array2 = new int[]{ 1,  2,  3,  4,  5,  6,  7,  7,  9, 10};
-        int[] array3 = new int[]{ 2,  3,  4,  5,  6,  7,  7,  9, 10, 11};
-        int[] array4 = new int[]{ 3,  4,  5,  6,  7,  8,  9, 10, 11, 12};
-        int[] array5 = new int[]{ 4,  5,  6,  7,  7,  9, 10, 11, 12, 13};
-        int[] array6 = new int[]{ 5,  6,  7,  7,  9, 10, 11, 12, 13, 14};
-        int[] array7 = new int[]{ 6,  7,  7,  9, 10, 11, 12, 13, 14, 15};
-        int[][] matrix = new int[][]{array1, array2, array3, array4, array5, array6, array7};
-
-        for (int[] i : matrix) System.out.println(Arrays.toString(i));
-
-        int target = 6;
-        // logarithmic method:
-        System.out.println(Arrays.toString(binarySurroundSearch(matrix, target)));
-        // linear method:
-        System.out.println(Arrays.toString(arraySearch(matrix, target)));
     }
 
     // logarithmic method:

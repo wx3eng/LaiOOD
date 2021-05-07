@@ -1,15 +1,18 @@
 package LaiDebug.CountAndSay;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CountAndSay {
 
     public static void main(String[] args) {
-        for(int i=0; i<20; i++)
-            System.out.println(countAndSay(i).length());
+        System.out.println(countAndSay(9));
     }
 
-    public static String countAndSay(int n) {
-        if(n<1) return new String();
-        if(n==1) return "1";
+    public static List<String> countAndSay(int n) {
+        List<String> solution = new ArrayList<>();
+        if(n<1) return solution;
+        solution.add("1");
         StringBuilder result = new StringBuilder();
         result.append(1);
         for(int i=2; i<=n; i++) {
@@ -28,8 +31,9 @@ public class CountAndSay {
             current.append(fast-slow);
             current.append(result.charAt(slow));
             result = current;
+            solution.add(result.toString());
         }
-        return result.toString();
+        return solution;
     }
 
 }
