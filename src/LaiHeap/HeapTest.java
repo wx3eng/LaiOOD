@@ -6,6 +6,11 @@ public class HeapTest {
 
     public static void main(String[] args) {
 
+        int[] array = new int[] {9,3,2,7,4,3,1,5,2,6,9};
+        System.out.println(Arrays.toString(HeapFunctions.heapSort(array)));
+
+        /*
+
         IntMaxHeap maxHeap = new IntMaxHeap(5);
 
         maxHeap.lockSize();
@@ -40,6 +45,8 @@ public class HeapTest {
             output[i] = maxHeap.remove();
         }
         System.out.println(Arrays.toString(output));
+
+         */
     }
 
 }

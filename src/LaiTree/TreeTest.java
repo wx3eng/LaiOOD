@@ -1,5 +1,7 @@
 package LaiTree;
 
+import LaiHeap.HeapFunctions;
+
 public class TreeTest {
 
     public static void main(String[] args) {
@@ -45,6 +47,7 @@ public class TreeTest {
         tree.insert(-2);
         tree.insert(8);
         tree.insert(9);
-        TreeFunctions.destructTreePrint(tree.getRoot());
+        System.out.println(HeapFunctions.isMinHeap(tree.getRoot()));
+        //TreeFunctions.destructTreePrint(tree.getRoot());
     }
 }
