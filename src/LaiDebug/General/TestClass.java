@@ -4,13 +4,11 @@ public class TestClass {
 
     public static void main(String[] args) {
 
-
-        for(int i=0; i<5; i++)
-            for(int j=0; j<3; j++) {
-                System.out.println("J is " + j);
-                System.out.println("I am dumb!");
-            }
-
+        int a = 3;
+        int b = 1;
+        b += a += 2;
+        System.out.println(a);
+        System.out.println(b);
     }
 
 }
