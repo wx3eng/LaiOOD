@@ -58,13 +58,13 @@ public class QuickSortLinkedList {
             }
         }
         else {
-            ListNode another = smallTemp;
-            while(another.next!=null)
-                another = another.next;
+            temp = smallTemp;
+            while(temp.next!=null)
+                temp = temp.next;
             if(node==null)
-                another.next = largeTemp;
+                temp.next = largeTemp;
             else {
-                another.next = node;
+                temp.next = node;
                 node.next = largeTemp;
             }
         }
