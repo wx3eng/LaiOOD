@@ -1,4 +1,4 @@
-package LaiDebug.LargestRectangle;
+package LaiDebug.DP.LargestRectangle;
 
 public class MatrixLargestRectangle {
 

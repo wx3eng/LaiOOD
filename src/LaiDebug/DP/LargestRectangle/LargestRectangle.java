@@ -1,4 +1,4 @@
-package LaiDebug.LargestRectangle;
+package LaiDebug.DP.LargestRectangle;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
