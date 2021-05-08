@@ -24,39 +24,37 @@ public class QuickSortLinkedList {
     }
 
     private static ListNode partition(ListNode node, ListNode small, ListNode large) {
-        if(node==null || node.next==null) return node;
+
+        if(node==null || node.next==null)
+            return node;
+
         ListNode smallTemp = small;
         ListNode largeTemp = large;
         ListNode temp = node.next;
+
         while(temp!=null) {
-            if(temp.value<node.value) {
-                smallTemp.next = temp;
-                smallTemp = smallTemp.next;
-            }
-            else {
-                largeTemp.next = temp;
-                largeTemp = largeTemp.next;
-            }
+            if(temp.value<node.value)
+                smallTemp = smallTemp.next = temp;
+            else
+                largeTemp = largeTemp.next = temp;
             temp = temp.next;
         }
-        smallTemp.next = null;
-        largeTemp.next = null;
-        node.next = null;
+
+        smallTemp.next = largeTemp.next = node.next = null;
         smallTemp = small.next;
         largeTemp = large.next;
-        small.next = null;
-        large.next = null;
+        small.next = large.next = null;
+
         smallTemp = partition(smallTemp, small, large);
         largeTemp = partition(largeTemp, small, large);
 
-        if(smallTemp==null){
+        if(smallTemp==null)
             if(node==null)
                 smallTemp = largeTemp;
             else {
                 smallTemp = node;
                 node.next = largeTemp;
             }
-        }
         else {
             temp = smallTemp;
             while(temp.next!=null)
