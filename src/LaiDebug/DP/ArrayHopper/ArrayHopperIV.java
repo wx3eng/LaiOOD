@@ -24,18 +24,19 @@ public class ArrayHopperIV {
         Set<Integer> reference = new HashSet<>();
 
         queue.offerLast(array.length-1);
+        reference.add(array.length-1);
         int count = 1;
 
         while(!queue.isEmpty()) {
             int size = queue.size();
             for (int k=0; k<size; k++) {
                 int current = queue.pollFirst();
-                reference.add(current);
                 for (int i=0; i<array.length-1; i++)
                     if (!reference.contains(i) && i-array[i]<=current && i+array[i]>=current) {
                         if (i==index)
                             return count;
                         queue.offerLast(i);
+                        reference.add(current);
                     }
             }
             count++;
