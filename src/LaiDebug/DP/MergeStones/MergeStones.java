@@ -21,30 +21,18 @@ public class MergeStones {
             for(int j=0; j+i<stones.length; j++)
                 reference[j][j+i] = reference[j][j+i-1]+reference[j+i][j+i];
 
-        return minCost(stones, reference, 0, stones.length-1);
-    }
+        int[][] solution = new int[reference.length][reference.length];
 
-    private static int minCost(int[] stones, int[][] reference, int left, int right) {
+        for(int j=0; j+1<stones.length; j++)
+            solution[j][j+1] = reference[j][j+1];
 
-        if(right-left==0)
-            return 0;
-        if(right-left==1)
-            return reference[left][right];
-
-        int min = Integer.MAX_VALUE;
-        int leftPivot = left;
-        int rightPivot = left+1;
-
-        for(int i=left; i<right; i++) {
-            int leftSum = minCost(stones, reference, left, i);
-            int rightSum = minCost(stones, reference, i+1, right);
-            if(leftSum+rightSum<min) {
-                min = leftSum + rightSum;
-                leftPivot = i;
-                rightPivot = i+1;
+        for(int i=2; i<stones.length; i++)
+            for(int j=0; j+i<stones.length; j++) {
+                solution[j][j+i] = Integer.MAX_VALUE;
+                for(int k=j; k<j+i; k++)
+                    solution[j][j+i] = Math.min(solution[j][j+i], reference[j][j+i]+solution[j][k]+solution[k+1][j+i]);
             }
-        }
 
-        return reference[left][leftPivot] + reference[rightPivot][right] + min;
+        return solution[0][stones.length-1];
     }
 }
