@@ -1,4 +1,4 @@
-package LaiDebug.DP.Sorting;
+package LaiDebug.Sorting;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
