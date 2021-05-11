@@ -21,18 +21,19 @@ public class MergeStones {
             for(int j=0; j+i<stones.length; j++)
                 reference[j][j+i] = reference[j][j+i-1]+reference[j+i][j+i];
 
-        int[][] solution = new int[reference.length][reference.length];
+        for(int j=0; j<stones.length; j++)
+            reference[j][j] = 0;
 
         for(int j=0; j+1<stones.length; j++)
-            solution[j][j+1] = reference[j][j+1];
+            reference[j+1][j] = reference[j][j+1];
 
         for(int i=2; i<stones.length; i++)
             for(int j=0; j+i<stones.length; j++) {
-                solution[j][j+i] = Integer.MAX_VALUE;
+                reference[j+i][j] = Integer.MAX_VALUE;
                 for(int k=j; k<j+i; k++)
-                    solution[j][j+i] = Math.min(solution[j][j+i], reference[j][j+i]+solution[j][k]+solution[k+1][j+i]);
+                    reference[j+i][j] = Math.min(reference[j+i][j], reference[j][j+i]+reference[k][j]+reference[j+i][k+1]);
             }
 
-        return solution[0][stones.length-1];
+        return reference[stones.length-1][0];
     }
 }
