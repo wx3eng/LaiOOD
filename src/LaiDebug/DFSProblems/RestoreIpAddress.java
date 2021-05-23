@@ -33,14 +33,12 @@ public class RestoreIpAddress {
             current.append('.');
 
         for(int i=depth; i<Math.min(depth+3, levels); i++) {
-            if(i==depth+2 &&
-                (reference.charAt(depth)>'2' ||
-                reference.charAt(depth)=='2' && reference.charAt(depth+1)>'5' ||
+            if(i!=depth && reference.charAt(depth)=='0' && reference.charAt(i)!='0'
+                    ||
+                i==depth+2 && (reference.charAt(depth)>'2' || reference.charAt(depth)=='2' && reference.charAt(depth+1)>'5' ||
                 reference.charAt(depth)=='2' && reference.charAt(depth+1)=='5' && reference.charAt(depth+2)>'5'))
                 break;
             current.append(reference.charAt(i));
-            if(i!=depth && reference.charAt(depth)=='0' && reference.charAt(i)!='0')
-                break;
             restore(solution, current, reference, count+1, total, i+1, levels);
         }
         while(current.length()>depth+count)
