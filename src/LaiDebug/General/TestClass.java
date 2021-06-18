@@ -7,8 +7,10 @@ import java.util.List;
 public class TestClass {
 
     public static void main(String[] args) {
-        List<Integer> list = new ArrayList<>(3);
-        System.out.println(list.toString());
+
+        int[][] test = new int[][]{{0, 1}, {1, 2}};
+        test[0] = test[1];
+        int a = 666;
     }
 
 }
