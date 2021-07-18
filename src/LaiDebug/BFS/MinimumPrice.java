@@ -58,7 +58,7 @@ public class MinimumPrice {
         int destination;
         int value;
         int sum;
-        Pair(int destination, int value, int sum) {
+        private Pair(int destination, int value, int sum) {
             this.destination = destination;
             this.value = value;
             this.sum = sum;

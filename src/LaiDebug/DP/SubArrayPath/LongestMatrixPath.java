@@ -2,6 +2,8 @@ package LaiDebug.DP.SubArrayPath;
 
 public class LongestMatrixPath {
 
+    // not good
+
     public static void main(String[] args) {
         int[][] matrix = new int[][]{
                 {21, 18, 8, 18, 0, 0, 28},

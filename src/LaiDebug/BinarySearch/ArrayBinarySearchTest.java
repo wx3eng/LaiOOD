@@ -25,6 +25,6 @@ public class ArrayBinarySearchTest {
 
     @Test
     public void binarySurroundSearchTest() {
-        assertArrayEquals(new int[]{6, 9}, binarySurroundSearch(matrix, 15));
+        assertArrayEquals(new int[]{6, 9}, binarySurroundSearch(matrix, 10));
     }
 }
