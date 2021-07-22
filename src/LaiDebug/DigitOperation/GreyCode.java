@@ -14,9 +14,6 @@ public class GreyCode {
         List<Integer> solution = new ArrayList<>();
 
         solution.add(0);
-        if (n == 0) {
-            return solution;
-        }
 
         for (int i = 0; i < n; i++) {
             int value = 1 << i;
