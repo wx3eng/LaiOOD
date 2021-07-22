@@ -18,8 +18,8 @@ public class GreyCode {
             return solution;
         }
 
-        for (int i = 1; i <= n; i++) {
-            int value = 1 << (i - 1);
+        for (int i = 0; i < n; i++) {
+            int value = 1 << i;
             for (int j = value - 1; j >= 0; j--) {
                 solution.add(value + solution.get(j));
             }
