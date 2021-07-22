@@ -19,9 +19,9 @@ public class GreyCode {
         }
 
         for (int i = 1; i <= n; i++) {
-            int value = (int) Math.pow(2, i);
-            for(int j = value/2 - 1; j >= 0; j--) {
-                solution.add(value/2 + solution.get(j));
+            int value = 1 << (i - 1);
+            for (int j = value - 1; j >= 0; j--) {
+                solution.add(value + solution.get(j));
             }
         }
 
