@@ -6,19 +6,16 @@ public class TestClass {
 
     public static void main(String[] args) {
 
-        Pair trial = new Pair(3, 4);
-    }
-
-    private static class Pair {
-
-        private int value;
-        private int position;
-
-        Pair(int value, int position) {
-            this.value = value;
-            this.position = position;
+        int[][] matrix = new int[][] {{1, 2}, {3, 4}};
+        matrix[0] = matrix[1];
+        for (int[] array : matrix) {
+            System.out.println(Arrays.toString(array));
         }
-
+        matrix[0][0] = -1;
+        for (int[] array : matrix) {
+            System.out.println(Arrays.toString(array));
+        }
     }
+
 
 }

@@ -74,12 +74,12 @@ public interface TreeFunctions {    // Any "GenericArray" below is the same as a
             for(int i=0; i<size; i++){
                 TreeNode<E> current = temp.poll();
                 if(current==null) {
-                    temp2.offer("X");
+                    temp2.offer("x");
                     temp.offer(null);
                     temp.offer(null);
                 }
                 else {
-                    temp2.offer(current.getValue().toString());
+                    temp2.offer("\u001B[31m" + current.getValue().toString() + "\u001B[0m");
                     temp.offer(current.getLeft());
                     temp.offer(current.getRight());
                 }
@@ -103,6 +103,9 @@ public interface TreeFunctions {    // Any "GenericArray" below is the same as a
             spacingSize /= 2;
             spacingOccurrence = 2*spacingOccurrence + 1;
         }
+        System.out.println();
+        System.out.println("---------------------------------");
+        System.out.println();
     }
 
     static String returnEdge(int edgeSize) {
